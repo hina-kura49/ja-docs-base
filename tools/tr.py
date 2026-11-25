@@ -17,8 +17,12 @@ def entries(name):
     return [e for e in parse(PO.format(name)) if e['msgid']]
 
 def code_only(s):
+    """訳さなくてよい文(コードの行、シグネチャ、1 語の識別子)かどうか。
+    短い見出しや「Binary name」のような説明文は、訳す対象なので False にする。"""
     t = s.strip()
-    return t.startswith(('>>>', '#')) or '->' in t or bool(re.fullmatch(r'[\w.:`\-\s,()]+', t) and (' ' not in t or re.fullmatch(r'[\w, ()]+', t)))
+    if t.startswith(('>>>', '#', '$')) or '->' in t:
+        return True
+    return len(t.split()) <= 1 and not t.endswith(('.', ':'))
 
 def alias_rule(s):
     return bool(apply_po.ALIAS.match(s) or apply_po.SAME_STR.match(s) or apply_po.SAME_BA.match(s))
