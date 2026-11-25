@@ -1,0 +1,106 @@
+/* ja-docs-base core: コードの窓と「誤訳を知らせる」ボタン(どのエンジンでも共通) */
+/* コードの「窓」: 明るい画面でも暗い画面でも、同じ暗い面に描く（site.js が帯を足す） */
+:root {
+  --win-bg: #1a1a1a;
+  --win-border: #333;
+  --win-rule: #ffffff14;
+  --win-text: #e6e6e6;
+  --win-muted: #9a9a9a;
+  --win-radius: 8px;
+}
+
+/* コードの窓: 上の帯に 3つの丸・言語・コピーのボタン */
+.doc pre {
+  margin: 20px 0;
+  padding: 16px 18px;
+  overflow-x: auto;
+  border: 1px solid var(--win-border);
+  border-radius: var(--win-radius);
+  background: var(--win-bg);
+  color: var(--win-text);
+  line-height: 1.6;
+}
+.doc pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+.code-block {
+  margin: 20px 0;
+  overflow: hidden;
+  border: 1px solid var(--win-border);
+  border-radius: var(--win-radius);
+  background: var(--win-bg);
+  color: var(--win-text);
+}
+.doc .code-block > pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.code-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 37px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--win-rule);
+  color: var(--win-muted);
+  font: 12.5px/1 "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  user-select: none;
+}
+.window-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.window-dots > i {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #555;
+}
+.window-dots > i:nth-child(2) { background: #6e6e6e; }
+.window-dots > i:nth-child(3) { background: #8a8a8a; }
+.code-language {
+  flex: 1;
+  min-width: 0;
+}
+.code-copy {
+  display: flex;
+  padding: 4px;
+  margin-right: -4px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition: color .15s;
+}
+.code-copy:hover,
+.code-copy[data-copied] { color: var(--win-text); }
+
+/* Material / Jekyll のどちらでも、窓の前の <pre> を同じ見た目にする */
+.md-typeset pre,
+.md-typeset .highlight { margin: 20px 0; }
+
+/* 誤訳を知らせるボタン(本文の末尾) */
+.report {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 6px 14px;
+  border: 1px solid currentColor;
+  color: inherit;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background .15s, color .15s;
+}
+.report:hover { background: var(--md-default-fg-color, var(--ink, #111)); color: var(--md-default-bg-color, var(--bg, #fff)); }
+
+/* Material: 窓の中のコードは、窓と同じ暗い面に描く */
+.md-typeset pre > code {
+  background: var(--win-bg);
+  color: var(--win-text);
+}

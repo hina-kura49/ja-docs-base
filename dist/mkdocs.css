@@ -1,0 +1,60 @@
+/* ja-docs-base mkdocs: 白黒の見た目(Material テーマの上書き) */
+:root,
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #111;
+  --md-primary-bg-color: #fff;
+  --md-accent-fg-color: #111;
+  --md-default-bg-color: #fff;
+  --md-default-fg-color: #111;
+  --md-default-fg-color--light: #555;
+  --md-typeset-a-color: #111;
+  --md-code-bg-color: #f4f4f4;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0e0e0e;
+  --md-primary-bg-color: #f2f2f2;
+  --md-accent-fg-color: #f2f2f2;
+  --md-default-bg-color: #0e0e0e;
+  --md-default-fg-color: #f2f2f2;
+  --md-default-fg-color--light: #a6a6a6;
+  --md-typeset-a-color: #f2f2f2;
+  --md-code-bg-color: #1c1c1c;
+}
+
+/* ヘッダー: 白地に黒の細い線 */
+.md-header {
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  border-bottom: 1px solid var(--md-default-fg-color);
+  box-shadow: none;
+}
+.md-typeset a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* 窓の中の色づけ: 暗い面で読める明るさにそろえる(色は文字色だけ) */
+.md-typeset .code-block {
+  --md-code-fg-color: #e6e6e6;
+  --md-code-bg-color: #1a1a1a;
+  --md-code-hl-comment-color: #8a8a8a;
+  --md-code-hl-keyword-color: #d9b38c;
+  --md-code-hl-string-color: #a8c9a0;
+  --md-code-hl-number-color: #e0a1a1;
+  --md-code-hl-function-color: #9fc1e0;
+  --md-code-hl-name-color: #e6e6e6;
+  --md-code-hl-constant-color: #c6a6e0;
+  --md-code-hl-operator-color: #c4c4c4;
+  --md-code-hl-punctuation-color: #c4c4c4;
+  --md-code-hl-special-color: #e0a1a1;
+  --md-code-hl-generic-color: #c4c4c4;
+  --md-code-hl-variable-color: #e6e6e6;
+}
+.md-typeset .code-block pre,
+.md-typeset .code-block .highlight {
+  margin: 0;
+}
+.md-typeset .code-block pre > code {
+  border-radius: 0;
+}
