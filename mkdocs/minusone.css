@@ -1,7 +1,7 @@
 /* ja-docs-base mkdocs/minusone: 0xFF-MinusOne デザインシステムを MkDocs Material に当てる。
    トークン(色・余白・角丸・書体)は、デザインシステムの tokens.css と同じ値。
    Material の明るさは [data-md-color-scheme] で決まるので、data-theme の代わりにそれを使う。 */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&family=Space+Grotesk:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap");
 
 :root,
 [data-md-color-scheme="default"] {
@@ -33,8 +33,10 @@
   --radius-none: 0;
   --radius-md: 12px;
   --radius-full: 9999px;
-  --font-display: "Space Grotesk", "Noto Sans JP", system-ui, sans-serif;
-  --font-sans: "Inter", "Noto Sans JP", system-ui, sans-serif;
+  /* 欧文は Roboto(世界で最も使われている Web フォント。Web Almanac 2024)、日本語は Noto Sans JP(日本語の Web フォントで 1 位)。
+     見出しも本文も同じ書体にそろえる */
+  --font-display: "Roboto", "Noto Sans JP", system-ui, sans-serif;
+  --font-sans: "Roboto", "Noto Sans JP", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -75,7 +77,7 @@ input,
 .md-typeset h4,
 .md-typeset .md-header__title {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 .md-typeset h1 { font-size: 40px; line-height: 48px; letter-spacing: -0.01em; margin: 0 0 var(--space-8); }
