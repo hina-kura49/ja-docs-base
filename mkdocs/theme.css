@@ -58,3 +58,22 @@
 .md-typeset .code-block pre > code {
   border-radius: 0;
 }
+
+/* 誤訳を知らせるボタン: 広い画面ではヘッダー、狭い画面(ヘッダーが窮屈)では本文の末尾に出す */
+.md-header .report {
+  align-self: center;
+  margin: 0 8px;
+  padding: 4px 14px;
+  border: 1px solid currentColor;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.md-header .report:hover { background: var(--md-default-fg-color); color: var(--md-default-bg-color); }
+@media (min-width: 60em) {
+  .md-content__inner > .report { display: none; }
+}
+@media (max-width: 59.9375em) {
+  .md-header .report { display: none; }
+}

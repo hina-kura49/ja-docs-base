@@ -55,7 +55,7 @@
   var source = document.querySelector('a.md-source');
   var repo = (cfg.repo || (source && source.href) || '').replace(/\/$/, '');
   var article = document.querySelector('.md-content__inner, #main');
-  if (!repo || !article || article.querySelector('.report')) return;
+  if (!repo || !article || document.querySelector('.report')) return;
 
   /* 題名はタブの題名から取る(本文の最初の見出しが目次のことがある) */
   var title = document.title.split(/\s[-|]\s/)[0].trim();
@@ -73,5 +73,16 @@
     '&title=' + encodeURIComponent('誤訳: ' + title) +
     '&body=' + encodeURIComponent(body);
   link.textContent = '誤訳を知らせる';
+
+  /* Jekyll のサイトは、ヘッダーに「誤訳を知らせる」(.gh)がある。題名と URL を入れた作成画面に向け直すだけにする */
+  var existing = document.querySelector('header a.gh');
+  if (existing) { existing.href = link.href; return; }
+
+  /* Material: ヘッダーにも置く(広い画面ではヘッダー、狭い画面では本文の末尾。切り替えは CSS) */
+  var inner = document.querySelector('.md-header__inner');
+  if (inner) {
+    var head = link.cloneNode(true);
+    inner.insertBefore(head, inner.querySelector('.md-header__source'));
+  }
   article.append(link);
 })();

@@ -176,19 +176,13 @@ input,
 [data-md-color-scheme="slate"] .md-header__button.md-logo img { filter: invert(1); }
 .md-header__button.md-logo img { height: 28px; width: auto; }
 
-/* --- コードの窓: デザインシステムに合わせる(面は surface、角なし、色は黒と灰色だけ) --- */
+/* --- コードの窓: 黒い面と、色づけは ja-docs / mkdocs.css のまま(ターミナルらしさを残す)。
+       デザインシステムに合わせるのは、角(なし)・ラベルの書体・アイコンの線だけ --- */
 :root,
 [data-md-color-scheme] {
-  --win-bg: var(--surface);
-  --win-border: var(--line);
-  --win-rule: var(--line);
-  --win-text: var(--ink);
-  --win-muted: var(--ink-muted);
   --win-radius: var(--radius-none);
 }
-.window-dots > i { border-radius: var(--radius-full); background: var(--line-strong); }
-.window-dots > i:nth-child(2) { background: var(--ink-muted); }
-.window-dots > i:nth-child(3) { background: var(--ink); }
+.window-dots > i { border-radius: var(--radius-full); }
 .code-header {
   font: 500 12px/16px var(--font-mono);
   letter-spacing: 0.08em;
@@ -200,24 +194,6 @@ input,
   stroke-linecap: butt;
   stroke-linejoin: miter;
 }
-/* 色づけは色相を使わない: コメントだけ灰色、ほかは黒。キーワードは太くする(等幅なので幅は変わらない) */
-.md-typeset .code-block {
-  --md-code-fg-color: var(--ink);
-  --md-code-bg-color: var(--surface);
-  --md-code-hl-comment-color: var(--ink-muted);
-  --md-code-hl-keyword-color: var(--ink);
-  --md-code-hl-string-color: var(--ink);
-  --md-code-hl-number-color: var(--ink);
-  --md-code-hl-function-color: var(--ink);
-  --md-code-hl-name-color: var(--ink);
-  --md-code-hl-constant-color: var(--ink);
-  --md-code-hl-operator-color: var(--ink-muted);
-  --md-code-hl-punctuation-color: var(--ink-muted);
-  --md-code-hl-special-color: var(--ink);
-  --md-code-hl-generic-color: var(--ink);
-  --md-code-hl-variable-color: var(--ink);
-}
-.md-typeset .code-block :is(.k, .kd, .kn, .kp, .kr, .kt, .nf, .nc) { font-weight: 700; }
 
 /* 誤訳ボタン: ボタンは radius-md、枠は line-strong */
 .md-typeset .report,
@@ -230,3 +206,12 @@ input,
   letter-spacing: 0.08em;
 }
 .report:hover { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+/* ヘッダーの誤訳ボタン */
+.md-header .report {
+  margin: 0 var(--space-2);
+  padding: var(--space-1) var(--space-4);
+  border-color: var(--line-strong);
+  color: var(--ink);
+  background: transparent;
+}
+.md-header .report:hover { background: var(--ink); color: var(--ground); }
