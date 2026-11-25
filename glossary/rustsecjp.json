@@ -1,0 +1,6 @@
+[
+  {"term": "unsafe", "ja": "unsafe", "desc": "Rust で、コンパイラによる安全の確認を、プログラマが肩代わりすると宣言する書き方。", "url": "https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html"},
+  {"term": "RustSec", "ja": "RustSec", "desc": "Rust のライブラリ（crate）の脆弱性を集めた、公式のデータベース。", "url": "https://rustsec.org/"},
+  {"term": "advisory", "ja": "アドバイザリ", "desc": "脆弱性についての、公式の注意喚起。影響する版と、直し方が書かれる。", "aliases": ["advisories"]},
+  {"term": "crate", "ja": "クレート（crate）", "desc": "Rust の、ライブラリやプログラムの配布の単位。", "aliases": ["crates"]}
+]
