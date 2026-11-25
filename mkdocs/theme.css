@@ -77,3 +77,8 @@
 @media (max-width: 59.9375em) {
   .md-header .report { display: none; }
 }
+
+/* 右側の目次が空のページ(最初の見出しが「目次」で、子が無いページなど)は、欄ごと隠して、本文を広げる */
+.md-sidebar--secondary:not(:has(.md-nav__item)) {
+  display: none;
+}
