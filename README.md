@@ -57,7 +57,7 @@ markdown_extensions:
 |---|---|
 | `core/` | コードの窓と誤訳ボタン（どのエンジンでも共通） |
 | `mkdocs/` | Material の白黒の配色（`theme.css`）と、MinusOne のデザインシステム（`minusone.css`） |
-| `jekyll/` | Jekyll 用のサイト一式の CSS と目次の JS |
+| `jekyll/` | Jekyll 用のサイト一式（CSS・目次の JS・共通レイアウト `layout-default.html`） |
 | `logos/` | RustSecJP（`rustsecjp-mark.png`: 透明背景に白のマーク）と MinusOne（Eclipse マーク）のロゴ |
 | `templates/` | issue のひな形（誤訳・訳語の指摘） |
 | `dist/` | 配る形（`build.sh` で作る。サイトが取り込むのはここ） |

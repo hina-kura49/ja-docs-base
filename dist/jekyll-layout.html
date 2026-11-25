@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+{% assign book = site.data.book %}
+{% assign cur = nil %}{% assign prev = nil %}{% assign next = nil %}
+{% for c in book.chapters %}{% assign u = "/" | append: c.file %}{% if u == page.url %}{% assign cur = c %}{% assign pi = forloop.index0 | minus: 1 %}{% assign ni = forloop.index0 | plus: 1 %}{% if pi >= 0 %}{% assign prev = book.chapters[pi] %}{% endif %}{% assign next = book.chapters[ni] %}{% endif %}{% endfor %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% if cur %}{% capture ptitle %}{{ cur.title }} | {{ book.seo_title }}{% endcapture %}{% capture pdesc %}「{{ cur.title }}」の章。{{ book.summary }}{% endcapture %}{% else %}{% assign ptitle = book.seo_title %}{% assign pdesc = book.summary %}{% endif %}
+<title>{{ ptitle }} | RustSecJP</title>
+<meta name="description" content="{{ pdesc | escape }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta property="og:type" content="{% if cur %}article{% else %}website{% endif %}">
+<meta property="og:title" content="{{ ptitle | escape }}">
+<meta property="og:description" content="{{ pdesc | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:site_name" content="RustSecJP">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"{% if cur %}TechArticle{% else %}Book{% endif %}","headline":{{ ptitle | jsonify }},"name":{{ ptitle | jsonify }},"description":{{ pdesc | jsonify }},"inLanguage":"ja","url":{{ page.url | absolute_url | jsonify }},{% if cur %}"isPartOf":{"@type":"Book","name":{{ book.seo_title | jsonify }},"url":{{ "/" | absolute_url | jsonify }}},{% endif %}"translationOfWork":{"@type":"CreativeWork","name":{{ book.original_title | jsonify }},"url":{{ book.source | jsonify }},"inLanguage":"en","author":{"@type":"Organization","name":{{ book.author | jsonify }}}},"license":{{ book.license_url | jsonify }},"isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"RustSecJP","url":"https://github.com/RustSecJP"}}
+</script>
+<link rel="icon" href="https://rustsecjp.github.io/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="https://rustsecjp.github.io/icon.png">
+<meta property="og:image" content="https://rustsecjp.github.io/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+<link rel="stylesheet" href="{{ '/assets/ja-docs.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="{{ '/' | relative_url }}"><img class="brand-logo" src="{{ '/assets/logo.png' | relative_url }}" alt="" width="28" height="28"><span><b>{{ book.short }}</b> 日本語訳</span></a>
+    <nav class="nav" aria-label="メインメニュー">
+      <a href="{{ '/' | relative_url }}"{% if page.url == "/" %} aria-current="page"{% endif %}>目次</a>
+      {% for c in book.nav %}<a href="{{ '/' | append: c.file | relative_url }}"{% if cur and cur.file == c.file %} aria-current="page"{% endif %}>{{ c.title }}</a>{% endfor %}
+      <a href="{{ book.source }}">原文</a>
+      <a href="https://rustsecjp.github.io/">RustSecJP</a>
+    </nav>
+    <a class="gh" href="{{ site.repo_url }}/issues/new/choose">誤訳を知らせる</a>
+  </div>
+</header>
+<div class="wrap">
+  <main id="main" class="doc">
+{% if cur %}
+    <details class="chapters">
+      <summary><span>{{ book.title }}</span><b>{{ cur.title }}</b></summary>
+      <ol>{% for c in book.chapters %}<li><a href="{{ '/' | append: c.file | relative_url }}"{% if c.file == cur.file %} aria-current="page"{% endif %}>{{ c.title }}</a></li>{% endfor %}</ol>
+    </details>
+{% endif %}
+{{ content }}
+{% if page.url == "/" and book.home_toc %}
+    <h2 id="chapters">章の一覧</h2>
+    <ol>{% for c in book.chapters %}<li><a href="{{ '/' | append: c.file | relative_url }}">{{ c.title }}</a></li>{% endfor %}</ol>
+{% endif %}
+{% if cur %}
+    <nav class="pager" aria-label="前後の章">
+      {% if prev %}<a class="pg prev" href="{{ '/' | append: prev.file | relative_url }}"><span>前の章</span>{{ prev.title }}</a>{% else %}<span></span>{% endif %}
+      {% if next %}<a class="pg next" href="{{ '/' | append: next.file | relative_url }}"><span>次の章</span>{{ next.title }}</a>{% endif %}
+    </nav>
+{% endif %}
+    <aside class="credit">
+      <p><b>これは非公式の日本語訳です。</b>原著者による確認や公認を受けたものではありません。内容が食い違う場合は原文が優先されます。</p>
+      <p>原文: <a href="{{ book.source }}">{{ book.original_title }}</a>（{{ book.author }}）／ライセンス: <a href="{{ book.license_url }}">{{ book.license }}</a>／訳した版: {{ book.version }}{% if book.translated %}／翻訳日: {{ book.translated }}{% endif %}</p>
+    </aside>
+  </main>
+  <aside class="toc" aria-label="このページの目次" hidden><p>このページ</p><ol id="toc"></ol></aside>
+</div>
+<footer class="foot">
+  <p>RustSecJP は<b>非公式</b>のコミュニティです。{{ book.disclaimer }}</p>
+  <p><a href="{{ site.repo_url }}">GitHub</a> ・ <a href="https://rustsecjp.github.io/">RustSecJP のトップページ</a></p>
+</footer>
+<script>window.JaDocs={repo:"{{ site.repo_url }}"};</script>
+<script src="{{ '/assets/ja-docs.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ '/assets/site.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+</body>
+</html>

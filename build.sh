@@ -17,6 +17,7 @@ cp mkdocs/minusone.css dist/minusone.css
 # Jekyll: 白黒のサイト一式の CSS と、目次の JS
 cp jekyll/site.css dist/jekyll.css
 cp jekyll/site.js  dist/jekyll.js
+cp jekyll/layout-default.html dist/jekyll-layout.html
 
 cp logos/* dist/logos/
 cp templates/mistranslation.md dist/mistranslation.md
