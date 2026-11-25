@@ -47,6 +47,8 @@ markdown_extensions:
 
 ### Jekyll の場合
 
+ヘッダーに団体のアイコンを出すには、`logos/rustsecjp-mark.png` を `assets/logo.png` に置き、レイアウトの `<span class="brand-mark">…</span>` を `<img class="brand-logo" src="{{ '/assets/logo.png' | relative_url }}" alt="" width="28" height="28">` に置き換えます。
+
 `jekyll.css`、`ja-docs.css`、`jekyll.js`、`ja-docs.js` を `assets/` に置いて読み込みます。誤訳ボタンのリポジトリは `window.JaDocs = { repo: "https://github.com/<組織>/<リポジトリ>" }` で指定します（MkDocs では自動で取れます）。
 
 ## 中身
@@ -56,7 +58,7 @@ markdown_extensions:
 | `core/` | コードの窓と誤訳ボタン（どのエンジンでも共通） |
 | `mkdocs/` | Material の白黒の配色（`theme.css`）と、MinusOne のデザインシステム（`minusone.css`） |
 | `jekyll/` | Jekyll 用のサイト一式の CSS と目次の JS |
-| `logos/` | RustSecJP と MinusOne（Eclipse マーク）のロゴ |
+| `logos/` | RustSecJP（`rustsecjp-mark.png`: 透明背景に白のマーク）と MinusOne（Eclipse マーク）のロゴ |
 | `templates/` | issue のひな形（誤訳・訳語の指摘） |
 | `dist/` | 配る形（`build.sh` で作る。サイトが取り込むのはここ） |
 
