@@ -59,7 +59,7 @@
   border-radius: 0;
 }
 
-/* 誤訳を知らせるボタン: 広い画面ではヘッダー、狭い画面(ヘッダーが窮屈)では本文の末尾に出す */
+/* 誤訳を知らせるボタン: 広い画面(66em 以上)ではヘッダー、狭い画面(ヘッダーが窮屈)では本文の末尾に出す */
 .md-header .report {
   align-self: center;
   margin: 0 8px;
@@ -71,14 +71,35 @@
   text-decoration: none;
 }
 .md-header .report:hover { background: var(--md-default-fg-color); color: var(--md-default-bg-color); }
-@media (min-width: 60em) {
+@media (min-width: 66em) {
   .md-content__inner > .report { display: none; }
 }
-@media (max-width: 59.9375em) {
+@media (max-width: 65.9375em) {
   .md-header .report { display: none; }
 }
 
 /* 右側の目次が空のページ(最初の見出しが「目次」で、子が無いページなど)は、欄ごと隠して、本文を広げる */
 .md-sidebar--secondary:not(:has(.md-nav__item)) {
   display: none;
+}
+
+/* 検索ボックスは、画面の幅によらず、ヘッダーの真ん中に置く。
+   transform を使うと、検索中の全画面の覆い(position: fixed)の基準が変わって壊れるので、margin で寄せる。 */
+@media (min-width: 60em) {
+  .md-header__inner { position: relative; }
+  .md-search {
+    position: absolute;
+    left: 50%;
+    margin-left: -5.85rem;   /* 検索欄の幅 11.7rem の半分(どの幅でも同じ幅) */
+    padding: .2rem 0;
+  }
+  /* 長いタイトルが、真ん中の検索欄に重ならないように、省略する(右の部品は右寄せのまま) */
+  .md-header__title { flex: 0 0 calc(50% - 10rem); }
+  /* 右の部品(誤訳ボタン・GitHub)は、右端に寄せる */
+  .md-header .md-header__inner .md-header__source { margin-left: auto; }
+}
+@media (min-width: 66em) {
+  .md-header .md-header__inner .report { margin-left: auto; }
+  .md-header .report + .md-header__source,
+  .md-header .report ~ .md-header__source { margin-left: 8px; }
 }
