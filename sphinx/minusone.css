@@ -1,0 +1,138 @@
+/* ja-docs-base sphinx/minusone: 0xFF-MinusOne のデザインを Sphinx(sphinx_rtd_theme)に当てる。
+   値は mkdocs/minusone.css と同じトークン。明るい配色だけ(暗い配色は持たない)。 */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap");
+
+:root {
+  --ground: #ffffff; --ink: #000000; --surface: #f4f4f4; --ink-muted: #5c5c5c;
+  --line: #e2e2e2; --line-strong: #8a8a8a;
+  --radius-md: 12px;
+  --font-sans: "Roboto", "Noto Sans JP", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* --- 書体 --- */
+body, input, .rst-content, .wy-menu-vertical, .rst-content h1, .rst-content h2, .rst-content h3,
+.rst-content h4, .rst-content h5, .rst-content h6, .rst-content .toctree-wrapper p.caption,
+.rst-content .admonition-title, .btn, .wy-side-nav-search > a, .wy-nav-top a, .rst-content dl dt,
+.rst-content table.docutils th, .rst-content .sig, .wy-breadcrumbs {
+  font-family: var(--font-sans);
+}
+.rst-content code, .rst-content tt, .rst-content pre, .rst-content kbd, .rst-content .sig-name,
+.rst-content .sig-prename { font-family: var(--font-mono); }
+.rst-content { font-size: 16px; line-height: 1.75; color: var(--ink); }
+.rst-content p, .rst-content li { line-height: 1.75; }
+
+/* --- 左のサイドバー: 白い面に、黒い文字 --- */
+.wy-nav-side { background: var(--surface); border-right: 1px solid var(--line); }
+.wy-side-nav-search { background: var(--ground); border-bottom: 1px solid var(--line); margin-bottom: 0; }
+.wy-side-nav-search > a, .wy-side-nav-search .wy-dropdown > a { color: var(--ink); font-weight: 700; font-size: 16px; }
+.wy-side-nav-search > a:hover { background: transparent; }
+.wy-side-nav-search input[type=text] {
+  border: 0; border-radius: var(--radius-md); background: var(--surface); box-shadow: none;
+  color: var(--ink); padding: 8px 12px 8px 14px; font-size: 14px;
+}
+.wy-menu-vertical a { color: var(--ink); }
+.wy-menu-vertical a:hover { background: #e9e9e9; color: var(--ink); }
+.wy-menu-vertical li.current { background: var(--surface); }
+.wy-menu-vertical li.current > a, .wy-menu-vertical li.on a {
+  background: #ececec; color: var(--ink); font-weight: 700; border: 0;
+}
+.wy-menu-vertical li.toctree-l1.current > a { border-top: 0; border-bottom: 0; }
+.wy-menu-vertical li.toctree-l2 a, .wy-menu-vertical li.toctree-l3 a { background: var(--surface); color: var(--ink-muted); }
+.wy-menu-vertical li.toctree-l2.current > a, .wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a { background: #f0f0f0; }
+.wy-menu-vertical li.current a { border-right: 0; }
+.wy-menu-vertical li code { background: none; border: 0; color: inherit; padding: 0; }
+.wy-menu-vertical li.current > a:hover, .wy-menu-vertical li.on a:hover { background: #e2e2e2; }
+.wy-menu-vertical a:active { background: #e2e2e2; }
+.wy-menu-vertical header, .wy-menu-vertical p.caption { color: var(--ink-muted); }
+
+/* --- 本文 --- */
+.wy-nav-content-wrap { background: var(--ground); }
+.wy-nav-content { background: var(--ground); max-width: 56rem; padding: 1.6rem 2.4rem 3rem; }
+.wy-nav-top { background: var(--ground); color: var(--ink); border-bottom: 1px solid var(--line); }
+.wy-nav-top a { color: var(--ink); font-weight: 700; }
+.wy-nav-top i { color: var(--ink); }
+.rst-content h1, .rst-content h2, .rst-content h3, .rst-content h4 { color: var(--ink); font-weight: 700; }
+.rst-content h1 { font-size: 36px; line-height: 1.25; margin-bottom: 28px; }
+.rst-content h2 { font-size: 26px; line-height: 1.35; margin-top: 56px; }
+.rst-content h3 { font-size: 20px; line-height: 1.4; }
+.rst-content a, .rst-content a:visited { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.rst-content a:hover { text-decoration-thickness: 2px; }
+.rst-content a.headerlink, .rst-content a.btn, .rst-content a.reference.internal > .pre { text-decoration: none; }
+.wy-breadcrumbs li a { color: var(--ink-muted); }
+.wy-breadcrumbs li a:hover { color: var(--ink); }
+.wy-breadcrumbs-aside a { color: var(--ink-muted) !important; text-decoration: underline; }
+
+/* インラインのコード: 赤ではなく、灰色の面に黒 */
+.rst-content code.literal, .rst-content tt.literal, .rst-content code.xref, .rst-content tt.xref,
+a .rst-content code, a .rst-content tt {
+  background: var(--surface); border: 0; border-radius: 4px; color: var(--ink); padding: 1px 5px;
+  font-size: 14px; font-weight: 400;
+}
+
+/* API の見出し(関数・クラスの定義): 青い帯をやめて、灰色の面に黒い縦線 */
+.rst-content dl:not(.docutils) > dt {
+  background: var(--surface); border: 0; border-left: 3px solid var(--ink); border-radius: 0 6px 6px 0;
+  color: var(--ink); padding: 8px 12px; font-size: 15px;
+}
+.rst-content dl:not(.docutils) dl:not(.field-list) > dt {
+  background: var(--surface); border: 0; border-left: 3px solid var(--line-strong); color: var(--ink);
+}
+.rst-content dl:not(.docutils) .descname, .rst-content dl:not(.docutils) .descclassname,
+.rst-content dl:not(.docutils) .sig-name, .rst-content dl:not(.docutils) .sig-prename { color: var(--ink); font-weight: 700; background: none; }
+.rst-content dl:not(.docutils) .sig-paren, .rst-content dl:not(.docutils) .sig-param, .rst-content dl:not(.docutils) em { color: var(--ink-muted); }
+.rst-content .viewcode-link, .rst-content .viewcode-back { color: var(--ink-muted); }
+
+/* 引数・戻り値・例外の一覧(field-list)は、定義の見出しの飾りをつけない */
+.rst-content dl.field-list > dt, .rst-content dl.field-list > dt:hover {
+  background: none; border: 0; border-radius: 0; padding: 0 12px 0 0; font-size: 14px; color: var(--ink-muted);
+}
+.rst-content dl.field-list > dd { margin-left: 0; }
+
+/* 注意書き: 角を丸く、色は灰色 */
+.rst-content .admonition, .rst-content .note, .rst-content .warning, .rst-content .tip, .rst-content .important,
+.rst-content .seealso, .rst-content .caution, .rst-content .danger, .rst-content .hint, .rst-content .attention,
+.rst-content .error { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+.rst-content .admonition-title { background: transparent; color: var(--ink); padding: 0 0 4px; font-weight: 700; }
+.rst-content .admonition-title::before { color: var(--ink); }
+
+/* 表 */
+.rst-content table.docutils, .wy-table-bordered-all { border: 1px solid var(--line); border-radius: 0; }
+.rst-content table.docutils th { background: var(--surface); color: var(--ink); }
+.rst-content table.docutils td, .rst-content table.docutils th { border-color: var(--line); }
+.rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td { background: var(--ground); }
+.wy-table-odd td, .wy-table-striped tr:nth-child(2n-1) td, .rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td { background: var(--ground); }
+
+/* 前へ・次へ */
+.btn-neutral { background: var(--ground) !important; color: var(--ink) !important; border: 1px solid var(--line-strong); border-radius: 999px; box-shadow: none; }
+.btn-neutral:hover { background: var(--ink) !important; color: var(--ground) !important; }
+footer { color: var(--ink-muted); }
+footer a { color: var(--ink-muted); text-decoration: underline; }
+hr { border-color: var(--line); }
+
+/* 検索の結果 */
+.rst-content .search li { border-bottom: 1px solid var(--line); }
+
+/* 「非公式の訳です」の帯 */
+.ja-notice { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; margin: 0 0 20px; font-size: 13px; line-height: 1.7; color: var(--ink); }
+
+/* コードの窓の中では、コードの色を、窓の暗い面に合わせる(ja-docs.css の窓の見た目を、Sphinx の構造に合わせる) */
+.rst-content .code-block pre, .rst-content div[class*="highlight"] pre {
+  background: none; border: 0; color: var(--win-text, #e6e6e6); font-size: 14px; line-height: 1.6; padding: 16px 18px; margin: 0;
+}
+.rst-content div[class*="highlight"] { background: none; border: 0; margin: 0; }
+.rst-content .code-block { margin: 20px 0; }
+.rst-content div[class*="highlight"] .go, .rst-content div[class*="highlight"] .gp { color: #9a9a9a; font-weight: 400; }
+.rst-content div[class*="highlight"] .k, .rst-content div[class*="highlight"] .kn, .rst-content div[class*="highlight"] .kc { color: #f0a36b; font-weight: 400; }
+.rst-content div[class*="highlight"] .s, .rst-content div[class*="highlight"] .s1, .rst-content div[class*="highlight"] .s2 { color: #9ac98b; }
+.rst-content div[class*="highlight"] .nb, .rst-content div[class*="highlight"] .nf, .rst-content div[class*="highlight"] .nc { color: #7fb4e8; }
+.rst-content div[class*="highlight"] .mi, .rst-content div[class*="highlight"] .mh, .rst-content div[class*="highlight"] .mf { color: #d9a5e6; }
+.rst-content div[class*="highlight"] .c1, .rst-content div[class*="highlight"] .c, .rst-content div[class*="highlight"] .cm { color: #8a8a8a; font-style: italic; }
+.rst-content div[class*="highlight"] .o, .rst-content div[class*="highlight"] .p { color: #cfcfcf; }
+.rst-content div[class*="highlight"] .gh, .rst-content div[class*="highlight"] .go { color: #9a9a9a; }
+
+/* 誤訳ボタン(パンくずの右側) */
+.wy-breadcrumbs-aside .report { margin: 0 12px 0 0; padding: 3px 12px; font-size: 12px; line-height: 20px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--ink) !important; text-decoration: none !important; white-space: nowrap; }
+.wy-breadcrumbs-aside .report:hover { background: var(--ink); color: var(--ground) !important; }
+.rst-content > .report, .wy-nav-content .report.report-foot { display: inline-block; }
+@media (max-width: 768px) { .wy-nav-content { padding: 1.2rem 1rem 2rem; } }

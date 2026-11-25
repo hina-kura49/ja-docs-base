@@ -31,6 +31,9 @@ cat mkdocs/theme.css > dist/mkdocs.css
 # MkDocs + MinusOne: 0xFF-MinusOne デザインシステム(mkdocs.css のあとに読み込む)
 cp mkdocs/minusone.css dist/minusone.css
 
+# Sphinx(sphinx_rtd_theme) + MinusOne
+cp sphinx/minusone.css dist/sphinx.css
+
 # Jekyll: 白黒のサイト一式の CSS と、目次の JS
 cp jekyll/site.css dist/jekyll.css
 cp jekyll/site.js  dist/jekyll.js

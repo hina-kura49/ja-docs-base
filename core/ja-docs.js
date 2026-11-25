@@ -6,11 +6,13 @@
 
   function languageOf(pre) {
     var code = pre.querySelector('code');
-    var m = ((code && code.className) + ' ' + pre.className + ' ' + (pre.parentNode.className || '')).match(/language-([\w+#-]+)/);
+    var cls = ((code && code.className) + ' ' + pre.className + ' ' + (pre.parentNode.className || '') + ' ' + (pre.parentNode.parentNode ? pre.parentNode.parentNode.className || '' : ''));
+    var m = cls.match(/language-([\w+#-]+)/) || cls.match(/highlight-([\w+#-]+)/);
+    if (m && m[1] === 'default') return 'python';   /* Sphinx の doctest は highlight-default */
     return m ? m[1] : 'text';
   }
 
-  [].forEach.call(document.querySelectorAll('.md-typeset pre, .doc pre'), function (pre) {
+  [].forEach.call(document.querySelectorAll('.md-typeset pre, .doc pre, .rst-content pre'), function (pre) {
     if (pre.parentNode.classList.contains('code-block')) return;
     var frame = document.createElement('div');
     frame.className = 'code-block';
@@ -54,7 +56,7 @@
   var cfg = window.JaDocs || {};
   var source = document.querySelector('a.md-source');
   var repo = (cfg.repo || (source && source.href) || '').replace(/\/$/, '');
-  var article = document.querySelector('.md-content__inner, #main');
+  var article = document.querySelector('.md-content__inner, #main, .rst-content');
   if (!repo || !article || document.querySelector('.report')) return;
 
   /* 題名はタブの題名から取る(本文の最初の見出しが目次のことがある) */
@@ -84,5 +86,8 @@
     var head = link.cloneNode(true);
     inner.insertBefore(head, inner.querySelector('.md-header__source'));
   }
+  /* Sphinx(rtd): パンくずの右側(「ページのソースを表示」の左)に置く */
+  var crumbs = document.querySelector('.wy-breadcrumbs-aside');
+  if (crumbs) { crumbs.insertBefore(link, crumbs.firstChild); return; }
   article.append(link);
 })();
