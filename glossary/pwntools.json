@@ -1,5 +1,5 @@
 [
-  {"term": "tube", "ja": "tube", "desc": "pwntools で、ソケット・プロセス・SSH などを、同じ操作で扱うための入れ物。名前なので、訳しません。"},
-  {"term": "context", "ja": "context", "desc": "pwntools の、全体の設定（アーキテクチャ、エンディアン、ログの量など）をまとめたオブジェクト。名前なので、訳しません。"},
-  {"term": "cyclic", "ja": "循環パターン（cyclic）", "desc": "どの 4 文字も 1 回しか現れない文字列。クラッシュしたときの値から、入力のどの位置かが分かる。"}
+  {"term": "tube", "ja": "tube", "desc": "pwntools で、ソケット・プロセス・SSH などを、同じ操作で扱うための入れ物。名前なので、訳しません。", "url": "https://0xff-minusone.github.io/pwntools-api-ja/tubes.html", "src": "pwntools API リファレンス（日本語訳）"},
+  {"term": "context", "ja": "context", "desc": "pwntools の、全体の設定（アーキテクチャ、エンディアン、ログの量など）をまとめたオブジェクト。名前なので、訳しません。", "url": "https://0xff-minusone.github.io/pwntools-api-ja/context.html", "src": "pwntools API リファレンス（日本語訳）"},
+  {"term": "cyclic", "ja": "循環パターン（cyclic）", "desc": "どの 4 文字も 1 回しか現れない文字列。クラッシュしたときの値から、入力のどの位置かが分かる。", "url": "https://0xff-minusone.github.io/pwntools-api-ja/util/cyclic.html", "src": "pwntools API リファレンス（日本語訳）"}
 ]

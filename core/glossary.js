@@ -78,7 +78,7 @@
     var d = document.createElement('div'); d.textContent = e.desc; tip.appendChild(d);
     if (e.url) {
       var a = document.createElement('a'); a.href = e.url; a.target = '_blank'; a.rel = 'noopener';
-      a.textContent = '詳しく見る'; tip.appendChild(a);
+      a.textContent = '詳しく見る' + (e.src ? '（' + e.src + '）' : ''); tip.appendChild(a);
     }
     tip.hidden = false;
     var r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;

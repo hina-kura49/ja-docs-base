@@ -13,6 +13,9 @@ for f in sorted(d.glob('*.json')):
             if n in seen and seen[n] != f.name:
                 print(f'重複: {n} が {seen[n]} と {f.name} にあります'); bad += 1
             seen[n] = f.name
+        if e.get('url') and not e.get('src'): print(f'出典名がありません: {e["term"]}'); bad += 1
+        if e.get('url') and 'wikipedia.org' in e['url']: print(f'Wikipedia は使わない: {e["term"]}'); bad += 1
+        if e.get('url') and not e['url'].startswith('https://'): print(f'https ではありません: {e["term"]}'); bad += 1
         if len(e.get('desc', '')) > 120: print(f'長すぎる: {e["term"]}'); bad += 1
 print('問題', bad, '件 / 用語', sum(1 for _ in seen), '語（別名を含む）')
 sys.exit(1 if bad else 0)
