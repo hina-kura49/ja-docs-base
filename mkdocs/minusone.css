@@ -1,0 +1,232 @@
+/* ja-docs-base mkdocs/minusone: 0xFF-MinusOne デザインシステムを MkDocs Material に当てる。
+   トークン(色・余白・角丸・書体)は、デザインシステムの tokens.css と同じ値。
+   Material の明るさは [data-md-color-scheme] で決まるので、data-theme の代わりにそれを使う。 */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&family=Space+Grotesk:wght@600&display=swap");
+
+:root,
+[data-md-color-scheme="default"] {
+  --ground: #ffffff;
+  --ink: #000000;
+  --surface: #f4f4f4;
+  --ink-muted: #5c5c5c;
+  --line: #e2e2e2;
+  --line-strong: #8a8a8a;
+  --inverse-ground: #000000;
+  --inverse-ink: #ffffff;
+}
+[data-md-color-scheme="slate"] {
+  --ground: #000000;
+  --ink: #ffffff;
+  --surface: #111111;
+  --ink-muted: #a3a3a3;
+  --line: #262626;
+  --line-strong: #6b6b6b;
+  --inverse-ground: #ffffff;
+  --inverse-ink: #000000;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-8: 32px;
+  --space-16: 64px;
+  --radius-none: 0;
+  --radius-md: 12px;
+  --radius-full: 9999px;
+  --font-display: "Space Grotesk", "Noto Sans JP", system-ui, sans-serif;
+  --font-sans: "Inter", "Noto Sans JP", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* --- Material の変数を、トークンに置き換える --- */
+[data-md-color-scheme] {
+  --md-default-bg-color: var(--ground);
+  --md-default-fg-color: var(--ink);
+  --md-default-fg-color--light: var(--ink-muted);
+  --md-default-fg-color--lighter: var(--line-strong);
+  --md-default-fg-color--lightest: var(--line);
+  --md-primary-fg-color: var(--ground);
+  --md-primary-bg-color: var(--ink);
+  --md-accent-fg-color: var(--ink);
+  --md-typeset-color: var(--ink);
+  --md-typeset-a-color: var(--ink);
+  --md-code-bg-color: var(--surface);
+  --md-code-fg-color: var(--ink);
+  --md-footer-bg-color: var(--inverse-ground);
+  --md-footer-bg-color--dark: var(--inverse-ground);
+  --md-footer-fg-color: var(--inverse-ink);
+  --md-footer-fg-color--light: var(--inverse-ink);
+  --md-footer-fg-color--lighter: var(--inverse-ink);
+}
+
+/* --- 書体と文字の大きさ --- */
+body,
+input,
+.md-typeset {
+  font-family: var(--font-sans);
+}
+.md-typeset {
+  font-size: 16px;
+  line-height: 28px;
+}
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset .md-header__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+}
+.md-typeset h1 { font-size: 40px; line-height: 48px; letter-spacing: -0.01em; margin: 0 0 var(--space-8); }
+.md-typeset h2 { font-size: 28px; line-height: 36px; letter-spacing: 0; margin: var(--space-16) 0 var(--space-4); }
+.md-typeset h3 { font-size: 20px; line-height: 28px; margin: var(--space-8) 0 var(--space-2); }
+.md-typeset h4 { font-size: 16px; line-height: 24px; }
+.md-typeset code,
+.md-typeset kbd,
+.md-typeset pre {
+  font-family: var(--font-mono);
+}
+.md-typeset code {
+  font-size: 14px;
+  background: var(--surface);
+  border-radius: var(--radius-none);
+}
+
+/* --- 枠・線・面: 情報の容器は角を立てる --- */
+.md-header {
+  background: var(--ground);
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  box-shadow: none;
+}
+.md-search__input {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+}
+.md-search__form {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+.md-search__input::placeholder { color: var(--ink-muted); }
+.md-search__icon,
+.md-header__button { color: var(--ink); }
+.md-typeset table:not([class]) {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-none);
+  box-shadow: none;
+  font-size: 14px;
+}
+.md-typeset table:not([class]) th {
+  background: var(--surface);
+  color: var(--ink);
+}
+.md-typeset hr { border-bottom: 1px solid var(--line); }
+.md-typeset a:not(.headerlink),
+.md-nav__link,
+.md-footer__link { color: inherit; }
+.md-typeset a:not(.headerlink) { color: var(--ink); text-decoration-color: var(--line-strong); }
+.md-typeset a:hover { text-decoration-color: var(--ink); }
+
+/* 注意書き: 色相で分けない。枠と、ラベルの文字で示す */
+.md-typeset .admonition,
+.md-typeset details {
+  border: 1px solid var(--line-strong) !important;
+  border-radius: var(--radius-none);
+  box-shadow: none;
+  background: var(--ground);
+}
+.md-typeset .admonition-title,
+.md-typeset summary {
+  background: var(--surface) !important;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.md-typeset .admonition-title::before,
+.md-typeset summary::before {
+  background-color: var(--ink) !important;
+}
+
+/* 左のナビ・目次: 選んでいる項目は、色ではなく太さで示す */
+.md-nav__link--active,
+.md-nav__item .md-nav__link--active { color: var(--ink); font-weight: 500; }
+.md-nav__link:hover { color: var(--ink); }
+
+/* フッター: 反転ブロック */
+.md-footer,
+.md-footer-meta {
+  background: var(--inverse-ground);
+  color: var(--inverse-ink);
+}
+.md-footer a,
+.md-footer-meta a,
+.md-footer__link { color: var(--inverse-ink); }
+
+/* フォーカス: 色ではなく形で示す(2px の実線 + 2px の間隔) */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* ロゴ: 黒のマークを、暗い地では反転させる */
+[data-md-color-scheme="slate"] .md-header__button.md-logo img { filter: invert(1); }
+.md-header__button.md-logo img { height: 28px; width: auto; }
+
+/* --- コードの窓: デザインシステムに合わせる(面は surface、角なし、色は黒と灰色だけ) --- */
+:root,
+[data-md-color-scheme] {
+  --win-bg: var(--surface);
+  --win-border: var(--line);
+  --win-rule: var(--line);
+  --win-text: var(--ink);
+  --win-muted: var(--ink-muted);
+  --win-radius: var(--radius-none);
+}
+.window-dots > i { border-radius: var(--radius-full); background: var(--line-strong); }
+.window-dots > i:nth-child(2) { background: var(--ink-muted); }
+.window-dots > i:nth-child(3) { background: var(--ink); }
+.code-header {
+  font: 500 12px/16px var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+/* アイコン: 2px の線、端は丸めず(butt)、角は尖らせる(miter) */
+.code-copy svg {
+  stroke-width: 2;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+/* 色づけは色相を使わない: コメントだけ灰色、ほかは黒。キーワードは太くする(等幅なので幅は変わらない) */
+.md-typeset .code-block {
+  --md-code-fg-color: var(--ink);
+  --md-code-bg-color: var(--surface);
+  --md-code-hl-comment-color: var(--ink-muted);
+  --md-code-hl-keyword-color: var(--ink);
+  --md-code-hl-string-color: var(--ink);
+  --md-code-hl-number-color: var(--ink);
+  --md-code-hl-function-color: var(--ink);
+  --md-code-hl-name-color: var(--ink);
+  --md-code-hl-constant-color: var(--ink);
+  --md-code-hl-operator-color: var(--ink-muted);
+  --md-code-hl-punctuation-color: var(--ink-muted);
+  --md-code-hl-special-color: var(--ink);
+  --md-code-hl-generic-color: var(--ink);
+  --md-code-hl-variable-color: var(--ink);
+}
+.md-typeset .code-block :is(.k, .kd, .kn, .kp, .kr, .kt, .nf, .nc) { font-weight: 700; }
+
+/* 誤訳ボタン: ボタンは radius-md、枠は line-strong */
+.md-typeset .report,
+.report {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  color: var(--ink);
+  font: 500 12px/16px var(--font-mono);
+  letter-spacing: 0.08em;
+}
+.report:hover { background: var(--ink); color: var(--ground); border-color: var(--ink); }

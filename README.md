@@ -54,9 +54,9 @@ markdown_extensions:
 | 場所 | 中身 |
 |---|---|
 | `core/` | コードの窓と誤訳ボタン（どのエンジンでも共通） |
-| `mkdocs/` | Material の白黒の配色 |
+| `mkdocs/` | Material の白黒の配色（`theme.css`）と、MinusOne のデザインシステム（`minusone.css`） |
 | `jekyll/` | Jekyll 用のサイト一式の CSS と目次の JS |
-| `logos/` | RustSecJP と MinusOne のロゴ |
+| `logos/` | RustSecJP と MinusOne（Eclipse マーク）のロゴ |
 | `templates/` | issue のひな形（誤訳・訳語の指摘） |
 | `dist/` | 配る形（`build.sh` で作る。サイトが取り込むのはここ） |
 
@@ -69,3 +69,20 @@ markdown_extensions:
 ## ライセンス
 
 MIT（`LICENSE`）。ロゴは各組織のものです。MkDocs Material、Material Design Icons、Lucide のアイコンは、それぞれのライセンスに従います。
+
+## MinusOne のデザインシステム
+
+`dist/minusone.css` は、0xFF-MinusOne のデザインシステム（白と黒の二値、Space Grotesk / Inter / JetBrains Mono、角の立った容器、円の装飾）を Material に当てます。`mkdocs.css` のあとに読み込みます。
+
+```yaml
+theme:
+  font: false          # 書体は minusone.css が読み込む
+  logo: assets/minusone-mark.svg
+  favicon: assets/minusone-avatar-light.svg
+extra_css:
+  - assets/ja-docs.css
+  - assets/mkdocs.css
+  - assets/minusone.css
+```
+
+コードの窓は、デザインシステムに合わせて、薄い面（`surface`）・角なし・灰色と黒だけの色づけになります。
