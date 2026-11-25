@@ -177,11 +177,7 @@ input,
 .md-header__button.md-logo img { height: 28px; width: auto; }
 
 /* --- コードの窓: 黒い面と、色づけは ja-docs / mkdocs.css のまま(ターミナルらしさを残す)。
-       デザインシステムに合わせるのは、角(なし)・ラベルの書体・アイコンの線だけ --- */
-:root,
-[data-md-color-scheme] {
-  --win-radius: var(--radius-none);
-}
+       デザインシステムに合わせるのは、ラベルの書体とアイコンの線だけ。角は丸いまま(--win-radius は ja-docs.css の既定 8px) --- */
 .window-dots > i { border-radius: var(--radius-full); }
 .code-header {
   font: 500 12px/16px var(--font-mono);
