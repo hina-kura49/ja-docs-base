@@ -11,12 +11,15 @@ cp core/glossary.js dist/glossary.js
 
 # 用語集: 共通 + 団体ごとのデータを、window.JA_GLOSSARY に入れる JS にする
 python3 glossary/check.py
-for org in minusone rustsecjp; do
+for org in minusone rustsecjp pwntools; do
   python3 - "$org" > "dist/glossary-$org.js" <<'PY'
 import json, sys
 org = sys.argv[1]
+# pwntools 用は、MinusOne 共通の分も含む(pwntools の訳サイトは MinusOne の一員)
+names = {"minusone": ["common", "minusone"], "rustsecjp": ["common", "rustsecjp"],
+         "pwntools": ["common", "minusone", "pwntools"]}[org]
 data = []
-for name in ("common", org):
+for name in names:
     data += json.load(open(f"glossary/{name}.json", encoding="utf-8"))
 print("window.JA_GLOSSARY=" + json.dumps(data, ensure_ascii=False) + ";")
 PY

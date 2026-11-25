@@ -46,7 +46,7 @@ def next_(name, n=60):
 
 def load_glossary():
     data = []
-    for f in ('common', 'minusone'):
+    for f in ('common', 'minusone', 'pwntools'):
         data += json.load(open(os.path.join(GLOSSARY_DIR, f + '.json'), encoding='utf-8'))
     return data
 
